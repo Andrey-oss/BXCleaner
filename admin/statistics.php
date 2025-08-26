@@ -6,9 +6,9 @@ use Bitrix\Main\Loader;
 require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_admin_before.php');
 
 // Check if user has an access
-$POST_RIGHT = $APPLICATION->GetGroupRight("andreyoss.cleaner");
-if ($POST_RIGHT == "D")
-    $APPLICATION->AuthForm(GetMessage("Insufficient permissions to view this page"));
+if (!$USER->IsAdmin()) {
+    $APPLICATION->AuthForm("Insufficient permission");
+}
 
 $APPLICATION->SetTitle(("Webserver Statistics"));
 
